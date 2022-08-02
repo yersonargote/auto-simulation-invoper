@@ -9,12 +9,14 @@ Each unit left over (unsold) must be returned to the supplier for $150,000/unit,
 The company does not want to have excess inventory, since a new version of the software is about to be released.
 version of the software is about to be released.
 Estimated sales (demand)
+
 | Quantity | probability | Sales price | Probability |
 |----------|-------------|-------------|-------------|
 |100-150   | 0,20        | 380.000     | 0,15        |
-|150-200   | 0,35        | 390.000     | 0,25 |
-|200-250 | 0,30 | 400.000 | 0,40
-|250-300 | 0,15 | 410.000 | 0,20
+|150-200   | 0,35        | 390.000     | 0,25        |
+|200-250   | 0,30        | 400.000     | 0,40        |
+|250-300   | 0,15        | 410.000     | 0,20        |
+
 a) Make a decision on the amount to order Q for the next quarter. Justify your decision
 b) With the decided Q, simulate 25 times the sales for the next quarter and the profit obtained.
 obtained.
@@ -31,12 +33,14 @@ Cada unidad que sobre (sin vender) se debe devolver al proveedor recobrando $ 15
 que no se desea tener inventario sobrante, puesto que está próxima a salir al mercado una nueva
 versión del software.
 Ventas (demanda) estimada
+
 | Quantity | probability | Sales price | Probability |
 |----------|-------------|-------------|-------------|
 |100-150   | 0,20        | 380.000     | 0,15        |
-|150-200   | 0,35        | 390.000     | 0,25 |
-|200-250 | 0,30 | 400.000 | 0,40
-|250-300 | 0,15 | 410.000 | 0,20
+|150-200   | 0,35        | 390.000     | 0,25        |
+|200-250   | 0,30        | 400.000     | 0,40        |
+|250-300   | 0,15        | 410.000     | 0,20        |
+
 a) Tome la decisión de la cantidad a pedir Q para el próximo trimestre. Justifique su decisión
 b) Con la Q decidida, simule 25 veces las ventas del próximo trimestre y la utilidad que se
 obtiene.
