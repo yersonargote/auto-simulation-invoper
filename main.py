@@ -1,42 +1,25 @@
 import json
-from random import randrange
-from typing import Optional
 
+from define import define_price, define_q
 from fill import fill
+from rand import random
 from tables import AMOUNT, SALES
 
-
-def random(first: int = 0, last: int = 999) -> int:
-    rand: int = randrange(first, last, step=1)
-    return rand
-
-
-def show(table: dict):
-    print(json.dumps(table, indent=4))
+PRICE: int = 300000
+SIMULATIONS: int = 25
+LEFTOVER: int = 150000
 
 
-def define_price(sales: dict) -> Optional[tuple]:
-    rand: int = random()
-
-    for idx, limit in enumerate(sales["assigned"]):
-        if rand < limit[1]:
-            price = sales["price"][idx]
-            return price, rand
+def show(data):
+    print(json.dumps(data, indent=4))
 
 
-def define_q(amounts: dict) -> Optional[tuple]:
-    rand: int = random()
-
-    for idx, limit in enumerate(amounts["assigned"]):
-        if rand < limit[1]:
-            LI, LS = amounts["range"][idx]
-            li, ls = limit[0], limit[1]
-            Q = LI + ((rand - li)/(ls - li)) * (LS - LI)
-            return round(Q), rand
-
-
-def utility(price: float, amount: int):
-    return price * amount - 0.3 * amount - 0.15
+def utility(price: float, amount: int, order: int) -> float:
+    excess: int = order - amount
+    income: float = price * amount
+    expenses: float = PRICE * order + LEFTOVER * excess
+    utility: float = income - expenses
+    return round(utility, 2)
 
 # print(f'Random: {rand1}')
 # print(f'Price: {price}')
@@ -49,19 +32,32 @@ def main():
     amounts = fill(AMOUNT)
     sales = fill(SALES)
 
-    simulatios: int = 25
-
     random1: list = []
     random2: list = []
     prices: list = []
     quantity: list = []
     utilities: list = []
 
-    for _ in range(simulatios):
+    # Cantidad de producto ordenado
+    order: int = random(100, 300)
+    print(f'Orden: {order}')
+
+    # Inversion total
+    total: float = order * PRICE
+    print(f'Total invertido: {total}')
+
+    counter: int = 0
+    # Cantidad minima de rentabilidad
+    min_prof: float = total * 0.3
+    print(f'Ganancia minima: {min_prof}')
+
+    for _ in range(SIMULATIONS):
         price, rand1 = define_price(sales)
         q, rand2 = define_q(amounts)
 
-        utlty = utility(price, q)
+        utlty = utility(price, q, order)
+        if utlty > min_prof:
+            counter += 1
 
         random1.append(rand1)
         prices.append(price)
@@ -83,7 +79,10 @@ def main():
     table["amount_sould"] = amount_sould
     table["utilities"] = utilities
 
-    show(table)
+    # show(table)
+
+    prob: float = round((counter/SIMULATIONS)*100, 2)
+    print(f"Rentabilidad mayor al 30% es del {prob}%")
 
 
 if __name__ == "__main__":
