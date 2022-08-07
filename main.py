@@ -15,10 +15,18 @@ def show(data):
 
 
 def utility(price: float, amount: int, order: int) -> float:
-    excess: int = order - amount
-    income: float = price * amount
-    expenses: float = PRICE * order + LEFTOVER * excess
-    utility: float = income - expenses
+    utility: float
+    income: float
+    expenses: float
+    excess: int
+    if amount < order:
+        excess = order - amount
+        income = price * amount + LEFTOVER * excess
+    else:
+        income = price * order
+    expenses: float = PRICE * order
+    utility = income - expenses
+
     return round(utility, 2)
 
 # print(f'Random: {rand1}')
