@@ -1,3 +1,6 @@
+"""
+    Define file for define the prices and quantity amounts.
+"""
 from rand import random
 
 
